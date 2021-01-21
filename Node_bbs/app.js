@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+// bbsRouter.js를 import.
+var bbsRouter = require('./routes/bbsRoute');
 
 var app = express();
 
@@ -21,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+// localhost:3000/bbs/* 요청하면 bbsRouter로 전달 
+app.use("/bbs",bbsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
