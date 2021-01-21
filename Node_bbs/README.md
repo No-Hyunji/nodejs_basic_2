@@ -24,9 +24,7 @@
   BigData를 취급할때는 RDBMS보다는 NoSQL형태의 DBMS를 많이 사용한다./
   mongoDB, 하둡DB를 많이 사용한다.
 
-## Nodejs에서 mongoDB를 연동 할 때는 Native방식 보다는 Schema를
-
-임의로 생성하여 취급을 한다.
+## Nodejs에서 mongoDB를 연동 할 때는 Native방식 보다는 Schema를 임의로 생성하여 취급을 한다.
 
 - mongoDB의 Schema를 만들어서 쉽게 연동할 수 있도록 해주는 도구가 mongoose이다.
 - mongoose를 사용하여 mongoDB를 마치 RDBMS처럼 취급하여 nodejs와 연동을 한다.
