@@ -83,9 +83,31 @@ router.post("/write", function (req, res) {
   // res.json(req.body);
 });
 
+// localhost:3000/bbs/view/id값 URL 요청
+// id값 : bbs의 각 라인(item)의 PK값
+// PK값을 가지고 tbl_bbs에서 1개의 item값을 추출하여
+// detail view에 보여주기
 router.get("/view/:id", function (req, res) {
   let id = req.params.id;
-  res.send(id);
+
+  // findOne : findById()
+  // {where : {_id:id}}
+  // table의 _id값이 list에서 전달받은 id값과
+  // 일치하는 item이 있는지 검사하는 코드
+  bbsVO
+    //   PK(_id)값이 id와 일치하는 데이터가 있는지 찾아라
+    .findOne({ _id: id })
+    .then(function (result) {
+      // PK값과 일치하는 item이 있으면 그 결과를 result에 담아준다
+      // res.json(result);
+      // bbsView.pug를 rendering할 때 bbsVO라는 이름으로 전달하여 주어라
+      res.render("bbsView", { bbsVO: result });
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+
+  // res.send(id);
 });
 
 module.exports = router;

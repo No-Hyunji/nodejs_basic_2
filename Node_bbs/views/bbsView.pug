@@ -1,0 +1,21 @@
+extends layout
+
+block content   
+    section.container
+        table.table.table-striped
+            tr
+                th 작성일자 
+                td= bbsVO.b_date
+                th 작성시각
+                td= bbsVO.b_time
+                th 작성자
+                td= bbsVO.b_write
+                th 조회수
+                td= bbsVO.b_count
+
+            tr
+                th 제목
+                td(colspan="7")= bbsVO.b_title
+            tr
+                td(colspan="8")= bbsVO.b_text
+                
