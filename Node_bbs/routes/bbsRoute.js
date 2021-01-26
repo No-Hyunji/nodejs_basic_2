@@ -35,7 +35,10 @@ router.get("/list", function (req, res) {
 // localhost:3000/bbs/write URL요청
 router.get("/write", function (req, res) {
   // bbsWrite.pug파일을 rendering하여 요청전송
-  res.render("bbsWrite");
+  // insert와 update를 write.pug파일로 공통으로 사용하기 위해서
+  // insert를 수행 할 때 비어있는 vo를 만들어서 bbsWrite에 전달해줘야 한다.
+  let data = new bbsVO();
+  res.render("bbsWrite", { bbsVO: data });
 });
 
 // form에 데이터를 입력하고 전송버튼을 눌러서 클릭했을 때 호출되는 URL
@@ -140,6 +143,52 @@ router.get("/delete/:id", function (req, res) {
     })
     .catch(function (error) {
       console.error(error);
+    });
+});
+
+// 전달받은 PK값으로 한개의 item을 조회하고
+// write form에 보여주고
+// 데이터를 입력 한 다음 저장을 하면
+// post("/update")로 보내서 데이터를 수정하도록 수행
+router.get("/update/:id", function (req, res) {
+  let id = req.params.id;
+  bbsVO.findOne({ _id: id }).then(function (result) {
+    res.render("bbsWrite", { bbsVO: result });
+  });
+});
+
+/*
+한 개의 item을 조회하여 write form 으로 보낸 후 
+데이터를 다시 받았을 때 
+req.body에는 id값이 사라진 상태로 전달된다. 
+하지만 update를 수행 할 때 id값을 URL에 전달하여 보냈기 때문에
+for(method="POST",action="/bbs/update/id값")형태의 URL이 자동으로 만들어지고 
+post method는 params에 id값을 받아서 수신하는 결과가 된다. 
+
+params로부터 id를 추출하여 강제로 req.body에 추가를 해준다.
+*/
+router.post("/update/:id", function (req, res) {
+  let id = req.params.id;
+  req.body._id = id;
+
+  bbsVO
+    .updateOne(
+      { _id: id }, // where조건문
+      {
+        // input박스에 입력한 데이터만 변경하도록 수행하는 코드
+        // SET에 해당하는 방법
+        // 주의해야 할 코드
+        // $set {req.body}
+        // update를 수행을 하는데 실제로 form에서 전달된 데이터 외에
+        // 나머지 데이터는 모두 삭제해버리는 문제가 있다.
+        b_title: req.body.b_title,
+        b_write: req.body.b_write,
+        b_text: req.body.b_text,
+      }
+    )
+    .then(function (result) {
+      // res.json(result);
+      res.redirect("/bbs/list");
     });
 });
 
