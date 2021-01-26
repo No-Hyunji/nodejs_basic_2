@@ -1,6 +1,8 @@
 extends layout
 
 block content   
+    script(src="/javascripts/bbsView.js?ver=2021-01-26")
+
     section.container
         table.table.table-striped
             tr
@@ -18,4 +20,9 @@ block content
                 td(colspan="7")= bbsVO.b_title
             tr
                 td(colspan="8")= bbsVO.b_text
+    
+    article.container.d-flex.justify-content-end.p3
+        button(data-id= bbsVO._id).view-btn.btn.btn-primary 본문수정
+        button(data-id= bbsVO._id).view-btn.btn.btn-danger 삭제
+        button.view-btn.btn.btn-success 목록으로
                 

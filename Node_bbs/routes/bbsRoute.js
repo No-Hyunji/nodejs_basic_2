@@ -110,4 +110,37 @@ router.get("/view/:id", function (req, res) {
   // res.send(id);
 });
 
+/*
+데이터를 삭제할 대 
+mongoDB 3.x이하에서는 remove(조건문)라는 함수를 사용했다. 
+조건문 없이 remove()를 실행하면 모든 테이블의 
+모든 데이터를 묻지도 따지지도 않고 삭제해버린다
+mongoDB 4.x이상에서는 이러한 문제를 방지하기 위해서
+deleteOne() deleteMany()라는 함수를 만들어 두었다. 
+deleteOne(조건문)은 조건에 일치하는 데이터 중 첫번째 한 개만 삭제를 수행
+deleteMany(조건문)은 조건에 일치하는 데이터를 모두 삭제한다. 
+*/
+router.get("/delete/:id", function (req, res) {
+  let id = req.params.id;
+  bbsVO
+    /*
+    mongoDB의 item(1개의 데이터를) 삭제하기
+    두가지 함수를 사용할 수 있다. 
+    deleteOne(조건문) : 삭제한 후 삭제되었다는 메시지만 알고 싶을 때 
+    findOneAndDelete(조건문) : 삭제한 후 실제 삭제된 데이터를 
+    다시 확인 하고 싶을 때 
+    */
+    // .deleteOne({ _id: id })
+    .findOneAndDelete({ _id: id })
+    .then(function (result) {
+      // 일반적인 CRUD 프로젝트에서는
+      // 삭제동작이 완료되면 list보기로 redirect를 수행한다.
+      // res.json(result);
+      res.redirect("/bbs/list");
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+});
+
 module.exports = router;
