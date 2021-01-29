@@ -1,64 +1,19 @@
 extends layout
 
 block content
-  style.
-    section.todo_main{
-      border:1px solid green;
-      width:50%;
-      margin:30px auto;
-      box-shadow:10px 10px 5px 0px rgba(0,0,0,0.7);
-    }
-
-    section.todo_main h1{
-      margin:0 auto;
-      background-color:green;
-      text-align:center;
-      padding:2rem;
-    }
-
-    section.todo_main form{
-      display:flex;
-    }
-
-    section.todo_main form input{
-      display:inline-block;
-      flex:5;
-      margin:3px;
-      border-radius:5px;
-      border:1px solid #ddd;
-    }
-
-    section.todo_main form button{
-      flex:1;
-      background-color:blue;
-      color:white;
-      padding:5px 12px;
-      margin:3px;
-      border-radius:5px;
-      border:none;
-      outline:none;
-      cursor:pointer;
-    }
-
-    section.todo_main form button:hover{
-      box-shadow : 10px 10px 25px 0px rgba(0,0,0,0.7);
-    }
-
-    article.todo_list{
-      border:1px solid #aaa;
-    }
-
-    article.todo_list ul li{
-      width:90%;
-      padding:8px;
-      border-bottom : 1px solid green;
-    }
+  link(rel="stylesheet",href="/stylesheets/todo_main.css")
+  script(src="/javascripts/todo_main.js")
 
   section.todo_main
     h1 MY TODO LIST
     form(method="POST")
       input(type="text",name="todo",placeholder="하고싶은 일")
-      button 저장 
+      //- button type을 button으로 바꾸면(기본값:submit) 
+      //- form내부에 있는 버튼을 클릭해도 input내용이 서버로 전송 되지 않는다
+      //- button 클릭을 스크립트로 이벤트 처리를 하여 입력값에 대한 유효성 검사를
+      //- 하기 위한 선행방법이다. 
+      //- <button type="button" onclick="btn_click()">저장</button>
+      button(type="button",onclick="btn_click()") 저장 
 
     article.todo_list
       ul
