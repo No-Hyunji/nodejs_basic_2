@@ -5,15 +5,15 @@ block content
   script(src="/javascripts/todo_main.js")
 
   section.todo_main
-    h1 MY TODO LIST
+    h1(id="main_title",onclick="main_title_click()") MY TODO LIST
     form(method="POST")
-      input(type="text",name="todo",placeholder="하고싶은 일")
+      input(type="text",name="todo",id="todo",placeholder="하고싶은 일")
       //- button type을 button으로 바꾸면(기본값:submit) 
       //- form내부에 있는 버튼을 클릭해도 input내용이 서버로 전송 되지 않는다
       //- button 클릭을 스크립트로 이벤트 처리를 하여 입력값에 대한 유효성 검사를
       //- 하기 위한 선행방법이다. 
       //- <button type="button" onclick="btn_click()">저장</button>
-      button(type="button",onclick="btn_click()") 저장 
+      button(type="button",id="btn-save") 저장 
 
     article.todo_list
       ul
