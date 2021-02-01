@@ -41,6 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // tag에 id값을 지정했을 때 사용하는 코드
   // id가 btn-save인 tag(button)에 click event 핸들러 설정
 
+  // Vanilla JS
+  // $("#btn-save")
+  document.querySelector("#bun-save").addEventListener("click", function () {
+    let todo_input = document.querySelectorAll("input")[0];
+  });
+
+  /*
   document.getElementById("btn-save").addEventListener("click", function () {
     // alert(todo.value);
     let todo_value = todo.value;
@@ -56,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementsByTagName("form")[0].submit();
     }
   });
-
+*/
   // id가 지정되지 않았을 때
   // tag이름으로 찾을경우는 같은 이름의 tag가 여러개 있을 수 있기 때문에
   // 무조건 배열로 값이 추출된다.

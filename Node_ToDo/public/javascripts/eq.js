@@ -36,10 +36,14 @@ console.log(0 == false);
 console.log(0 === false);
 
 let num = 0;
+// if의 조건문 안에 들어있는게 true여야만 중괄호 안에것들이 실행된다.
+
+// And Also(기본값)
 if (num && ++num) {
 }
 console.log("num && ++num : ", num);
 
+// Or Else
 if (num || ++num) {
 }
 console.log("num || ++num : ", num);
