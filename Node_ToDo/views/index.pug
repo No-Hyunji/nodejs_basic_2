@@ -2,16 +2,11 @@ extends layout
 
 block content
   link(rel="stylesheet",href="/stylesheets/todo_main.css")
+  script(src="/javascripts/todo_main.js")
   script.
     var todo_data =""
-    document.addEventListener("DOMContentLoaded",function(){
-      todo_data = `!{todo_data}`  
-      localStorage.setItem("todo_data",todo_data)
-      console.log(todo_data)
-      const _todo_data = JSON.parse(localStorage.getItem("todo_data"))
-      document.querySelector("#todo_1").innerHTML = _todo_data.todo
-    })
-  script(src="/javascripts/todo_main.js")
+    todo_data = `!{todo_data}`  
+  script(src="/javascripts/todo_sub.js")
   section.todo_main
     h1(id="main_title",onclick="main_title_click()") MY TODO LIST
     form(method="POST")
@@ -20,9 +15,4 @@ block content
 
     article.todo_list
       button(id="btn-new") 새로고침 
-      ul
-        li#todo_1 온라인 수업
-        li ToDo List 만들기
-        li 오늘의 과제
-        li 내일은 금욜
-        li 다음주면 땡이길 
+      ul#todo_list
